@@ -82,5 +82,8 @@ Para adicionar um novo canal (ex: Push Notification):
 - [Refactoring Guru - Abstract Factory](https://refactoring.guru/design-patterns/abstract-factory)
 
 ---
+## Histórico de Versões
 
-**Autores**: [Esther Sena](https://github.com/esmsena) e [Mariiana Siqueira](https://github.com/Maryyscreuza)
+| Versão | Data       | Descrição  | Autor(es) | Revisor(es) | Detalhes  da revisão |
+|--------|-----------|-----------------------------|-----------|-------------|----------|
+| `1.0`  | 25/09/2025 | Criação  do documento README. |[Esther Sena](https://github.com/esmsena) | - | - |
