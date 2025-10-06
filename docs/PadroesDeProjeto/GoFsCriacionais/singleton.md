@@ -106,4 +106,4 @@ Esses componentes seguem práticas comuns em sistemas reais de e-mail e platafor
 
 | Versão | Data       | Descrição                               | Autor(es) | Revisor(es) | Detalhes da revisão |
 |-------:|------------|------------------------------------------|-----------|-------------|----------------------|
-| `1.0`  | 24/09/2025 | Criação do documento para o padrão Singleton | [Thales Germano](https://github.com/thalesgvl) | - | - |
+| `1.0`  | 24/09/2025 | Criação do documento para o padrão Singleton | [Thales Germano](https://github.com/thalesgvl) e [Eric Akio](https://github.com/eric-kingu) | - | - |
