@@ -1,7 +1,7 @@
 # Padrão Facade no Projeto
 
 ## Introdução  
-O padrão Facade é um padrão estrutural que tem como objetivo fornecer uma interface unificada para um conjunto de interfaces em um subsistema [1](https://refactoring.guru/pt-br/design-patterns/facade). Ele define uma camada de abstração que simplifica o uso de componentes complexos, oferecendo ao cliente um ponto de acesso único e intuitivo [2](https://www.devmedia.com.br/padrao-de-projeto-facade-em-java/26476). No contexto do nosso projeto, o Facade foi utilizado para integrar e simplificar as operações relacionadas às principais entidades do sistema (Usuário, Conversa e Postagem). Assim, em vez de o cliente interagir diretamente com cada classe e seus detalhes de implementação, ele passa a utilizar apenas a fachada, tornando o processo mais ágil, seguro e de fácil manutenção.
+O padrão Facade é um padrão estrutural que tem como objetivo fornecer uma interface unificada para um conjunto de interfaces em um subsistema [1](https://refactoring.guru/pt-br/design-patterns/facade). Ele define uma camada de abstração que simplifica o uso de componentes complexos, oferecendo ao cliente um ponto de acesso único e intuitivo [2](https://www.devmedia.com.br/padrao-de-projeto-facade-em-java/26476). No contexto do nosso projeto, o Facade foi utilizado para integrar e simplificar as operações relacionadas às principais entidades do sistema (Usuário, Conversa e Postagem). Assim, em vez de o cliente interagir diretamente com cada classe e seus detalhes de implementação, ele passa a utilizar apenas a fachada, tornando o processo mais ágil, seguro e de fácil manutenção, ou seja, antes da implementação do Facade, um cliente precisaria importar e instanciar os `Builders` de `Usuario`, `Postagem` e `Conversa` separadamente, aumentando o acoplamento e a complexidade do código que consome essas funcionalidades. A fachada elimina essa necessidade, centralizando a lógica de criação.
 
 ## Objetivo/Metodologia
 O objetivo do uso do Facade neste projeto é simplificar o uso do sistema, fornecendo uma interface única para operações comuns, buscando reduzir o acoplamento entre o cliente e as classes internas do sistema, e também facilitando a manutenção, isolando mudanças internas sem impactar a interface utilizada pelos clientes [3](https://climaco.medium.com/design-pattern-facade-6b0b2220a604).  
@@ -52,13 +52,34 @@ Ela oferece três métodos principais:
 - criarPostagem() para facilitar a geração de postagens,
 - iniciarConversa() para permitir a criação de conversas entre usuários.
 
-As classes Usuario, Postagem e Conversa representam os subsistemas internos. Elas contêm os atributos e métodos específicos de cada entidade, mas o cliente não precisa interagir diretamente com elas — basta chamar a SistemaFacade. As setas no diagrama mostram a relação de dependência: a fachada utiliza (ou cria) os objetos de cada uma dessas classes, mas mantém a interface de interação simples e unificada para o cliente. Podemos ver a representação desse diagrama abaixo na imagem 1:
+A seguir, um exemplo de como uma classe cliente utilizaria esta fachada, demonstrando a simplificação alcançada:
+
+```java
+// Classe que representa o cliente consumindo a fachada
+public class ClienteApp {
+    public static void main(String[] args) {
+        // O cliente instancia apenas a fachada
+        SistemaFacade facade = new SistemaFacade();
+
+        // Realiza operações complexas com chamadas de método simples
+        Usuario sara = facade.criarUsuario("Sara Amanda", "sara@email.com", "senha123", "Bio do usuário.");
+        Postagem post = facade.criarPostagem("Primeira postagem usando Facade!");
+        
+        System.out.println("Usuário criado: " + sara.getNome());
+        System.out.println("Postagem criada com sucesso.");
+    }
+}
+```
+
+As classes Usuario, Postagem e Conversa representam os subsistemas internos. Elas contêm os atributos e métodos específicos de cada entidade, mas o cliente não precisa interagir diretamente com elas — basta chamar a SistemaFacade. As setas no diagrama mostram a relação de dependência: a fachada utiliza (ou cria) os objetos de cada uma dessas classes, mas mantém a interface de interação simples e unificada para o cliente. Podemos ver a representação desse diagrama abaixo na figura 1:
 
 **Figura 1:** Diagrama UML Facade  
 
-![Diagrama UML do Facade](../../assets/uml_facade.png)  
+![Diagrama UML do Facade](../../Assets/uml_facade.png)  
 
 **Autores:** [João Pedro Costa](https://github.com/johnaopedro) e [Julia Gabriela](https://github.com/JuliaGabP). 
+
+Analisando o diagrama acima, a classe `SistemaFacade` atua como o ponto de entrada. As setas com os rótulos "cria" e "inicia" indicam que a fachada é responsável por orquestrar a construção dos objetos do subsistema. Isso demonstra visualmente que um cliente não precisa conhecer `Usuario`, `Postagem` ou `Conversa` diretamente, apenas a fachada.
 
 ## Vantagens
 - Simplificação da interface;  
@@ -89,3 +110,4 @@ Conjunto de obras consultadas.
 | ------ | ----------- | ----------- | --------- | ----------- | --------------------|
 | `1.0`  | 24/09/2025  | Criação do documento, código do facade e diagrama UML|[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
 | `1.1`  | 27/09/2025  | Adicionando referências nos respectivos lugares e complementando a metodologia|[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
+| `1.2`  | 08/10/2025  | Adicionando exemplo e analise do diagrama |[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
