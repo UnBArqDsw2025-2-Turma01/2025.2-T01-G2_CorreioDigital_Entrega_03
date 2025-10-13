@@ -2,48 +2,67 @@
 
 ## Introdução  
 
-O **Decorator** é um padrão de projeto estrutural da UML que permite **adicionar funcionalidades a objetos de forma dinâmica**, sem modificar sua estrutura original.  
+O **Decorator** é um padrão de projeto **estrutural** que tem como objetivo
+acrescentar funcionalidades adicionais a um objeto de forma **flexível e
+dinâmica**, sem a necessidade de modificar a sua estrutura original.  
+Em vez de criar várias subclasses para cada variação de comportamento, o
+Decorator permite **combinar responsabilidades** por meio de objetos que
+“decoram” a classe base, empilhando funcionalidades conforme a necessidade.
 
-No contexto deste projeto, ele foi aplicado ao módulo de **Chat**, possibilitando que uma mensagem básica seja enriquecida progressivamente com novos comportamentos, de acordo com as necessidades do usuário.  
+A ideia central é envolver um objeto dentro de outro que implementa a mesma
+interface, adicionando comportamento antes ou depois da execução dos métodos
+originais. Assim, o objeto decorado mantém sua identidade, mas ganha **novas
+capacidades em tempo de execução**.  
 
-Em vez de criar diversas subclasses específicas para cada tipo de mensagem (como mensagens com emoji, com anexo, criptografadas ou formatadas), utilizamos **decoradores encadeáveis** que ampliam as capacidades da mensagem original de forma flexível e modular.  
+Esse padrão é bastante útil em cenários onde o sistema deve permanecer **aberto
+para extensão, mas fechado para modificação** (Princípio Aberto/Fechado da
+programação orientada a objetos). Ele promove **reuso de código**, evita a
+explosão de subclasses e aumenta a **manutenibilidade** da aplicação.
 
-Com essa abordagem, conseguimos:  
-- **Reuso de código**: reaproveitar a mensagem base sem duplicação.  
-- **Extensibilidade**: adicionar novas funcionalidades sem alterar classes existentes.  
-- **Composição dinâmica**: combinar múltiplos recursos (emoji + anexo + criptografia + formatação).  
-
- Assim, o uso do Decorator garante que o sistema de mensagens seja **flexível, escalável e aderente a boas práticas de Arquitetura e Desenho de Software**.
+No contexto deste projeto, o Decorator foi aplicado para estender dinamicamente
+entidades do domínio, como perfis de usuários (premium, verificado), postagens
+(com tags, fixadas), mensagens (com criptografia, confirmação de leitura) e
+notificações (urgentes, com som). Essa abordagem garante um sistema mais
+modular, escalável e fácil de evoluir.
 
 ## Objetivo/Metodologia
 
-O objetivo da aplicação do padrão **Decorator** neste projeto é possibilitar a **extensão dinâmica das funcionalidades do módulo de Chat**, garantindo que novas capacidades possam ser incorporadas às mensagens sem a necessidade de alterar a estrutura das classes originais.  
-Essa abordagem visa promover **flexibilidade, reuso de código e escalabilidade**, aspectos essenciais para manter a qualidade do software e atender aos requisitos evolutivos do sistema de comunicação entre usuários. 
+O principal objetivo da aplicação do **padrão de projeto Decorator** neste
+projeto é fornecer um mecanismo de **extensão flexível** para as classes do
+domínio, permitindo adicionar comportamentos ou responsabilidades de forma
+dinâmica, sem a necessidade de modificar as implementações originais. Essa
+abordagem garante maior modularidade, evita a duplicação de código e mantém
+a base do sistema mais clara e fácil de evoluir ao longo do tempo.  
 
-Para a construção desta solução, seguimos as seguintes etapas metodológicas:  
+A utilização do Decorator foi orientada por dois fatores principais:  
+1. A necessidade de **personalizar funcionalidades** de acordo com cenários
+distintos, como usuários comuns que podem se tornar premium ou verificados;  
+2. A possibilidade de **empilhar comportamentos** para enriquecer objetos já
+existentes, como posts que podem ser fixados, receber tags ou passar por
+processos de moderação mais rigorosos.  
 
-1. **Identificação da entidade principal**  
-   - O objeto central é a classe `Mensagem`, que representa uma mensagem simples enviada entre usuários.  
+A metodologia seguida envolveu a identificação de classes com **potencial de
+evolução contínua**, como `Perfil`, `Post`, `Mensagem` e `Notificacao`. Em
+vez de criar múltiplas subclasses para cada variação, foram definidos
+**decoradores especializados**, cada um responsável por acrescentar uma
+função extra, como destaque visual, criptografia, alerta sonoro ou marcação
+de status.  
 
-2. **Definição de uma abstração base**  
-   - Foi criada a interface `Mensagem` e a classe concreta `MensagemSimples`, responsável por representar o conteúdo básico do chat.  
+Com isso, é possível **combinar dinamicamente** diferentes decoradores,
+adaptando o comportamento do sistema às necessidades do usuário ou às regras
+de negócio. Essa abordagem reforça princípios importantes de engenharia de
+software, como **baixo acoplamento, alto reuso de código e aderência ao
+Princípio Aberto/Fechado (OCP)**.  
 
-3. **Criação do Decorador Abstrato**  
-   - Implementamos a classe `MensagemDecorator`, responsável por servir como camada intermediária para a extensão de comportamentos, mantendo a aderência ao princípio **Open/Closed** (OCP).  
-
-4. **Desenvolvimento dos Decoradores Concretos**  
-   - Foram adicionadas especializações que representam funcionalidades adicionais:  
-     - `MensagemComEmoji`  
-     - `MensagemComAnexo`  
-     - `MensagemCriptografada`  
-     - `MensagemFormatada`  
-
-5. **Encadeamento de Decoradores**  
-   - As mensagens podem ser combinadas de forma incremental, permitindo que uma mensagem simples seja enriquecida com múltiplos recursos de maneira **modular e configurável**.  
-
-Assim, a metodologia adotada garante que o sistema de mensagens permaneça **extensível e adaptável**, em conformidade com os princípios da **Arquitetura e Desenho de Software**, além de favorecer a manutenção a longo prazo.
+No contexto do projeto, o Decorator viabilizou a evolução incremental do
+sistema, permitindo que novas funcionalidades sejam incorporadas de forma
+não-invasiva, mantendo a arquitetura coesa e a manutenção simplificada.
 
 ## Implementação
+
+**Figura 1:** Diagrama UML Decorator  
+
+![Diagrama UML do Decorator](../../Assets/uml_decorator.png)
 
 ## Vantagens
 
@@ -51,9 +70,23 @@ Assim, a metodologia adotada garante que o sistema de mensagens permaneça **ext
 
 ## Bibliografia
 
+> GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J.  
+> **Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos**.  
+> Bookman, Porto Alegre, 2000. (Clássico catálogo GoF onde o padrão Decorator foi descrito).
+
+> Refactoring.Guru.  
+> **Decorator**. Disponível em: <https://refactoring.guru/pt-br/design-patterns/decorator>.  
+> Acesso em: 13 out. 2025.
+
+> ALUR, D. et al.  
+> **Core J2EE Patterns: Best Practices and Design Strategies**.  
+> Prentice Hall, 2003. (Referência sobre uso de Decorator em arquiteturas Java corporativas).
+
 ## Histórico de Versões
 
 | Versão |     Data    | Descrição   | Autor(es) | Revisor(es) | Detalhes da revisão | 
 | ------ | ----------- | ----------- | --------- | ----------- | --------------------|
 | `1.0`  | 11/10/2025  | Criação do esqueleto do documento | [Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim) |-|-|
 | `1.1`  | 13/10/2025  | Criação da introdução e metodologia | [Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim) |-|-|
+| `1.2`  | 13/10/2025  | Criação do Diagrama UML Decorator e atualização da introdução e metodologia | [Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim) |-|-|
+
