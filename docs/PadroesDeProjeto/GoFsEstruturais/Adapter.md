@@ -244,11 +244,6 @@ Contexto e integração no CorreioDigital:
 - Local sugerido no repo: `projeto/chat/services/traducao/` com arquivos `interfaces.py`, `adapters.py` e `fallback.py`.
 - Testes: mover o teste para `tests/test_adapter.py` para integração com a suíte de testes.
 
-Notas operacionais importantes:
-
-- Timeouts e retries: integre timeouts na chamada HTTP e um mecanismo de retry com backoff exponencial (ex.: `tenacity` em produção).
-- Rate limiting: implemente counters e circuit breaker se usar provedores com quotas rígidas.
-- Caching: cache de traduções recentes pode reduzir custos e latência (por texto+idioma hash).
 
 ```Python
 # Teste pytest para fallback
@@ -308,9 +303,10 @@ export class GoogleAdapter implements ITradutor {
 
 Contexto e localização no projeto:
 
-- Contexto: adaptação de payloads de APIs externas para os tipos/objetos do frontend (ex.: `PostAPIAdapter` no Planetário Virtual).
-- Local sugerido no repo: `frontend/src/services/apiAdapters.ts` ou `projeto/frontend/src/services/apiAdapters.ts`.
-- Observação: preferir o Adapter de Objeto (composition) em TypeScript, como feito no exemplo referência.
+- Contexto: adaptação de payloads de APIs externas para os tipos/objetos do frontend do CorreioDigital (ex.: `MessageAPIAdapter` para normalizar o retorno das traduções antes de o chat exibi-las).  
+- Local sugerido no repositório: `frontend/src/services/apiAdapters.ts` ou `projeto/frontend/src/services/apiAdapters.ts`.  
+- Observação: prefira o Adapter por composição (Object Adapter) em TypeScript, encapsulando os serviços HTTP e expondo uma interface unificada ao frontend.
+
 
 #### Exemplo de Client (uso)
 
