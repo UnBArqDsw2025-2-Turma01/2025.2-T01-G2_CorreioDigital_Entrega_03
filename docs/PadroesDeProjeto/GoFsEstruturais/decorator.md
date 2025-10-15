@@ -4,19 +4,19 @@
 
 O **Decorator** é um padrão de projeto **estrutural** que tem como objetivo
 acrescentar funcionalidades adicionais a um objeto de forma **flexível e
-dinâmica**, sem a necessidade de modificar a sua estrutura original.  
+dinâmica**, sem a necessidade de modificar a sua estrutura original [1](https://refactoring.guru/pt-br/design-patterns/decorator).  
 Em vez de criar várias subclasses para cada variação de comportamento, o
 Decorator permite **combinar responsabilidades** por meio de objetos que
-“decoram” a classe base, empilhando funcionalidades conforme a necessidade.
+“decoram” a classe base, empilhando funcionalidades conforme a necessidade [3](https://www.digitalocean.com/community/tutorials/decorator-design-pattern-in-java-example).
 
 A ideia central é envolver um objeto dentro de outro que implementa a mesma
 interface, adicionando comportamento antes ou depois da execução dos métodos
 originais. Assim, o objeto decorado mantém sua identidade, mas ganha **novas
-capacidades em tempo de execução**.  
+capacidades em tempo de execução** [1](https://refactoring.guru/pt-br/design-patterns/decorator).  
 
 Esse padrão é bastante útil em cenários onde o sistema deve permanecer **aberto
 para extensão, mas fechado para modificação** (Princípio Aberto/Fechado da
-programação orientada a objetos). Ele promove **reuso de código**, evita a
+programação orientada a objetos) [2](https://www.devmedia.com.br/padrao-de-projeto-decorator-em-java/26238). Ele promove **reuso de código**, evita a
 explosão de subclasses e aumenta a **manutenibilidade** da aplicação.
 
 No contexto deste projeto, o Decorator foi aplicado para estender dinamicamente
@@ -52,7 +52,7 @@ Com isso, é possível **combinar dinamicamente** diferentes decoradores,
 adaptando o comportamento do sistema às necessidades do usuário ou às regras
 de negócio. Essa abordagem reforça princípios importantes de engenharia de
 software, como **baixo acoplamento, alto reuso de código e aderência ao
-Princípio Aberto/Fechado (OCP)**.  
+Princípio Aberto/Fechado (OCP)** [2](https://www.devmedia.com.br/padrao-de-projeto-decorator-em-java/26238).  
 
 No contexto do projeto, o Decorator viabilizou a evolução incremental do
 sistema, permitindo que novas funcionalidades sejam incorporadas de forma
@@ -374,17 +374,17 @@ Notificações:
 
 ## Bibliografia
 
-> GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J.  
-> **Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos**.  
-> Bookman, Porto Alegre, 2000. (Clássico catálogo GoF onde o padrão Decorator foi descrito).
-
-> Refactoring.Guru.  
+> [1] Refactoring.Guru.  
 > **Decorator**. Disponível em: <https://refactoring.guru/pt-br/design-patterns/decorator>.  
 > Acesso em: 13 out. 2025.
 
-> ALUR, D. et al.  
-> **Core J2EE Patterns: Best Practices and Design Strategies**.  
-> Prentice Hall, 2003. (Referência sobre uso de Decorator em arquiteturas Java corporativas).
+> [2] DevMedia.  
+> **Padrão de Projeto Decorator em Java**. Disponível em: <https://www.devmedia.com.br/padrao-de-projeto-decorator-em-java/26238>.  
+> Acesso em: 15 out. 2025.
+
+> [3] DigitalOcean.  
+> **Understanding the Decorator Design Pattern**. Disponível em: <https://www.digitalocean.com/community/tutorials/decorator-design-pattern-in-java-example>.  
+> Acesso em: 15 out. 2025.
 
 ## Histórico de Versões
 
@@ -394,3 +394,5 @@ Notificações:
 | `1.1`  | 13/10/2025  | Criação da introdução e metodologia | [Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim) |-|-|
 | `1.2`  | 13/10/2025  | Criação do Diagrama UML Decorator e atualização da introdução e metodologia | [Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim) |-|-|
 | `1.3`  | 13/10/2025  | Adição da implementação em código dos Decorators | [Pedro Ferreira Gondim](https://github.com/G0ndim) e [Túlio Augusto Celeri](https://github.com/TulioCeleri) |-|-|
+| `1.4`  | 15/10/2025  | Atualização das referências bibliográficas | [Pedro Ferreira Gondim](https://github.com/G0ndim) e [Túlio Augusto Celeri](https://github.com/TulioCeleri) |-|-|
+
