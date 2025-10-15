@@ -9,15 +9,69 @@ Na aplicação proposta, o Composite é utilizado para gerenciar a **distribuiç
 
 ---
 
-## Objetivo e Justificativa
+## Objetivo
 
-O objetivo principal do **Composite** é possibilitar que o sistema trate elementos individuais (`Estudante`) e composições de elementos (`GrupoDeEstudo`) da mesma maneira.  
-Essa abordagem reduz o acoplamento e simplifica a lógica de distribuição de conteúdo, garantindo que as atividades possam ser iniciadas sem depender da estrutura da hierarquia.
+O principal objetivo do padrão **Composite** neste projeto é permitir que o sistema trate **elementos individuais** (`Estudante`) e **estruturas compostas** (`GrupoDeEstudo`) de forma uniforme, facilitando o gerenciamento de atividades linguísticas, práticas e interações.  
+Com isso, elimina-se a necessidade de lógica condicional para diferenciar um aluno de um grupo, garantindo que a mesma operação — como iniciar uma prática, atribuir um exercício ou distribuir um conteúdo — possa ser aplicada de maneira homogênea, independentemente da complexidade da estrutura.
 
-**Exemplos práticos de uso no projeto:**
-- Atribuir uma prática de vocabulário a um único estudante.
-- Atribuir a mesma prática a uma turma inteira, propagando automaticamente a atividade para todos os membros.
-- Criar subgrupos dentro de turmas e distribuir atividades recursivamente.
+Essa abordagem traz os seguintes benefícios ao projeto:
+- **Redução do acoplamento** entre as partes do sistema.  
+- **Simplificação da lógica** de distribuição de conteúdo.  
+- **Escalabilidade** para suportar novos tipos de participantes no futuro.  
+
+### Exemplos práticos de uso no projeto
+
+- **Atividade individual:**  
+  Atribuir uma prática de vocabulário específica para um único estudante, permitindo acompanhar seu progresso individualmente.
+
+- **Distribuição em grupo:**  
+  Enviar a mesma atividade para uma turma inteira, propagando automaticamente para todos os membros sem necessidade de lógica adicional.
+
+- **Subgrupos específicos:**  
+  Criar subgrupos dentro de uma turma (por exemplo, alunos com dificuldades em pronúncia) e atribuir atividades direcionadas apenas a eles.
+
+- **Hierarquia de distribuição:**  
+  Atribuir uma tarefa a um grupo principal, garantindo que ela seja repassada a todos os subgrupos e estudantes pertencentes à hierarquia.
+
+- **Expansão e manutenção simples:**  
+  Adicionar novos estudantes ou grupos sem alterar a lógica de distribuição, mantendo a escalabilidade e a flexibilidade do sistema.
+
+## Metodologia
+O processo de aplicação do padrão **Composite** neste projeto seguiu um fluxo estruturado e iterativo, dividido em várias etapas que combinaram teoria e prática:
+
+1. **Estudo teórico inicial**  
+   - O ponto de partida foi o estudo do conteúdo apresentado em aula, com base em materiais e slides fornecidos na disciplina de Arquitetura e Desenho de Software.  
+   - A partir dessa etapa, compreendi o conceito central do Composite: **tratar objetos simples e compostos de maneira uniforme** e estruturar sistemas em **árvores hierárquicas**.
+
+2. **Análise de exemplos reais e estudo de casos**  
+   - Em seguida, analisei exemplos práticos apresentados pela professora e disponíveis em fontes clássicas como *Design Patterns* (Gamma et al., 1994) e [Refactoring Guru](https://refactoring.guru/pt-br/design-patterns/composite).  
+   - Essa análise foi essencial para entender como o padrão é aplicado em cenários reais, como gerenciadores de arquivos (arquivos e pastas), sistemas gráficos (elementos e containers) e plataformas de ensino (alunos e turmas).
+
+3. **Compreensão do funcionamento prático através de código**  
+   - A partir de exemplos implementados em Java, foi possível observar como cada componente do padrão (Component, Leaf e Composite) se relaciona e como a recursividade é utilizada para propagar ações em toda a hierarquia.  
+   - Essa etapa prática ajudou a consolidar a teoria e facilitou a transposição para o contexto do meu projeto.
+
+4. **Mapeamento do domínio do projeto**  
+   - Com base no entendimento teórico e prático, o próximo passo foi mapear quais entidades do **Correio Digital** poderiam se beneficiar do Composite.  
+   - Foram identificados como candidatos principais:  
+     - `Estudante` — representando um usuário individual do sistema.  
+     - `GrupoDeEstudo` — representando uma turma ou grupo formado por estudantes e outros subgrupos.
+
+5. **Modelagem da estrutura hierárquica**  
+   - Estruturei a interface `ParticipanteDeEstudo` para servir como **Component**, definindo a operação comum `iniciarPratica()`.  
+   - Implementei a classe `Estudante` como **Leaf**, responsável por executar a prática individualmente.  
+   - Implementei a classe `GrupoDeEstudo` como **Composite**, responsável por propagar a prática para todos os membros da estrutura, inclusive para subgrupos.
+
+6. **Validação e integração ao projeto**  
+   - Por fim, a implementação foi testada com uma estrutura hierárquica complexa, contendo múltiplos estudantes, grupos e subgrupos.  
+   - A prática foi iniciada a partir do nível mais alto da hierarquia e propagada automaticamente a todos os níveis inferiores, comprovando a eficácia do padrão.
+
+### Resultado da Metodologia
+
+Com esse processo, consegui transformar um conceito teórico em uma solução aplicada ao contexto do projeto, tornando o sistema mais **modular, escalável e de fácil manutenção**.  
+A metodologia adotada — que começou com a teoria, passou pela análise de exemplos e culminou com a implementação prática — foi essencial para compreender profundamente o padrão **Composite** e aplicá-lo de forma eficiente ao problema real do sistema.
+
+
 
 ---
 
@@ -153,8 +207,7 @@ public class ClienteDemo {
 
 ## Bibliografia
  
-Vídeo Aula:
-[Aula Composite](
+- Vídeo Aula: [Aula Composite](
 https://unbbr-my.sharepoint.com/personal/mileneserrano_unb_br/_layouts/15/stream.aspx?id=%2Fpersonal%2Fmileneserrano%5Funb%5Fbr%2FDocuments%2FArqDSW%20%2D%20V%C3%ADdeosOriginais%2F09c%20%2D%20Video%2DAula%20%2D%20DSW%20%2D%20GoFs%20%2D%20Estruturais%20%2D%20Composite%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E7746451f%2D540e%2D4b6f%2Da3ea%2D6461ca83d832)
 
 - GAMMA, E. et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley, 1994.  
@@ -168,3 +221,4 @@ https://unbbr-my.sharepoint.com/personal/mileneserrano_unb_br/_layouts/15/stream
 | Versão |     Data    | Descrição   | Autor(es) | Revisor(es) | Detalhes da revisão | 
 | ------ | ----------- | ----------- | --------- | ----------- | --------------------|
 | `1.0`  | 15/10/2025 | Criação do documento e implementação inicial do padrão Composite | [Thales Germano](https://github.com/thalesgvl) | -           |  -  |
+| `1.1`  | 15/10/2025 | Adicionando metodologia e correções na bibliografia | [Thales Germano](https://github.com/thalesgvl) | -           |  -  |
