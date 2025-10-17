@@ -29,8 +29,14 @@ O processo de aplicação do padrão no projeto seguiu as seguintes etapas:
 5. **Integração ao sistema:** Os estados foram integrados ao módulo de mensagens, permitindo que a transição entre eles ocorra dinamicamente conforme ações do usuário ou eventos do sistema.
 
 ---
+## Diagrama UML — Padrão State
 
-![Diagrama State](../../Assets/diagramaState.png)
+Abaixo está a representação do diagrama de estados aplicado ao projeto:
+
+<p align="center">
+  <img src="../../Assets/diagramaState.png" alt="Diagrama UML do padrão State" width="600px">
+</p>
+
 
 ## Desenvolvimento
 
