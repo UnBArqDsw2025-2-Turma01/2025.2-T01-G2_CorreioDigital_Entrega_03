@@ -7,6 +7,9 @@ Esse padrão é especialmente útil em cenários onde há **relações hierárqu
 
 Na aplicação proposta, o Composite é utilizado para gerenciar a **distribuição de atividades linguísticas** (como exercícios, práticas de conversação e testes) tanto para **estudantes individuais** quanto para **grupos de estudo ou turmas**.  
 
+A teoria e prática, além das aulas, foram baseadas nesta fonte.  
+- [Composite – GoF Structural Pattern](https://refactoring.guru/pt-br/design-patterns/composite)  
+
 ---
 
 ## Objetivo
@@ -198,10 +201,22 @@ public class ClienteDemo {
 
 ## Justificativa de Uso
 
-- O padrão **Composite** elimina a necessidade de condicionais para diferenciar estudantes e grupos.  
-- Ele promove **extensibilidade**: novos tipos de participantes podem ser adicionados sem alterar a lógica do cliente.  
-- Facilita a **propagação automática** de atividades em estruturas complexas.  
-- Alinha-se a práticas reais de **sistemas de aprendizado e plataformas de ensino online**, onde turmas e subgrupos coexistem de forma hierárquica.
+A adoção do padrão **Composite** traz diversos benefícios no contexto do sistema de aprendizado de idiomas, especialmente ao lidar com estruturas hierárquicas e distribuição de atividades de forma uniforme. No entanto, como qualquer padrão de projeto, ele também possui algumas limitações que devem ser consideradas.
+
+### Benefícios
+
+- O padrão **Composite** elimina a necessidade de condicionais para diferenciar estudantes e grupos, simplificando a lógica do cliente.  
+- Promove **extensibilidade**: novos tipos de participantes (como grupos especializados ou turmas temáticas) podem ser adicionados sem alterar o funcionamento do restante do sistema.  
+- Facilita a **propagação automática** de atividades em estruturas complexas, garantindo que cada nível da hierarquia execute as operações necessárias.  
+- Alinha-se a práticas reais de **plataformas de ensino online**, onde estudantes, turmas e subgrupos coexistem e interagem em diferentes níveis.
+
+### Possíveis Desvantagens
+
+- A estrutura hierárquica pode se tornar **mais complexa de manter e depurar** conforme o sistema cresce, especialmente se muitos níveis de composição forem criados.  
+- Pode haver **sobrecarga de memória e processamento** se a hierarquia for muito profunda ou incluir muitos objetos compostos.  
+- Em sistemas menores ou com hierarquias simples, a aplicação do padrão pode ser **desnecessária e aumentar a complexidade** do código sem trazer benefícios reais.
+
+Em suma, o **Composite** se mostra altamente vantajoso em cenários que exigem **escalabilidade, flexibilidade e baixo acoplamento**, sendo uma escolha estratégica para este projeto. Entretanto, sua aplicação deve ser cuidadosamente avaliada conforme a complexidade e o tamanho da hierarquia evoluem.
 
 ---
 
