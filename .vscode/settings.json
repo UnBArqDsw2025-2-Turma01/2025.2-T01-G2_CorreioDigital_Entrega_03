@@ -1,0 +1,5 @@
+{
+  // Faz o Java Language Server reconhecer o source root do exemplo Maven
+  // Configurações locais do editor removidas (observer-example em Java foi arquivado)
+  // Se você quiser reativar suporte Java, remova este arquivo ou configure paths apropriados.
+}
