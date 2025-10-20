@@ -4,7 +4,7 @@
 
 O padrão Command é um padrão de projeto **comportamental** que converte solicitações, operações ou ações em objetos independentes, encapsulando todas as informações necessárias para executá-las, como o método a ser chamado, o objeto que o invoca e os parâmetros necessários [[1](#ref1),[2](#ref2)].  
 
-No contexto do **CorreioDigital**, este padrão é aplicado para gerenciar o sistema de mensagens, interações e notificações, permitindo que diferentes tipos de comunicações sejam processadas, registradas, agendadas e controladas de forma consistente e desacoplada. Essa abordagem proporciona uma arquitetura mais flexível e extensível, na qual novas funcionalidades — como enviar, editar, reagir ou apagar mensagens — podem ser adicionadas sem alterar o código existente.
+No contexto do **CorreioDigital**, este padrão é aplicado para gerenciar o sistema de mensagens, interações e notificações, permitindo que diferentes tipos de comunicações sejam processadas, registradas, agendadas e controladas de forma consistente e desacoplada. Essa abordagem proporciona uma arquitetura mais flexível e extensível, na qual novas funcionalidades como enviar, editar, reagir ou apagar mensagens podem ser adicionadas sem alterar o código existente.
 
 ## 2. Metodologia
 
