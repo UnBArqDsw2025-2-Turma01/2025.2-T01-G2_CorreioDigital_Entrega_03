@@ -2,7 +2,9 @@
 
 ## 1. Introdução
 
-O padrão Command é um padrão de projeto **comportamental** que converte solicitações em objetos independentes [[1](#ref1),[2](#ref2)]. No contexto do **CorreioDigital**, este padrão é aplicado para gerenciar o sistema de mensagens e notificações, permitindo que diferentes tipos de comunicações sejam processadas, registradas e controladas de forma consistente.
+O padrão Command é um padrão de projeto **comportamental** que converte solicitações, operações ou ações em objetos independentes, encapsulando todas as informações necessárias para executá-las, como o método a ser chamado, o objeto que o invoca e os parâmetros necessários [[1](#ref1),[2](#ref2)].  
+
+No contexto do **CorreioDigital**, este padrão é aplicado para gerenciar o sistema de mensagens, interações e notificações, permitindo que diferentes tipos de comunicações sejam processadas, registradas, agendadas e controladas de forma consistente e desacoplada. Essa abordagem proporciona uma arquitetura mais flexível e extensível, na qual novas funcionalidades — como enviar, editar, reagir ou apagar mensagens — podem ser adicionadas sem alterar o código existente.
 
 ## 2. Metodologia
 
@@ -16,7 +18,9 @@ O desenvolvimento do padrão Command no CorreioDigital seguiu as seguintes etapa
 2. **Implementação**
    - Desenvolvimento das interfaces de comando
    - Criação dos comandos específicos para mensagens
-   - Integração com o sistema de notificações
+   - Integração com o sistema de notificações  
+
+As etapas foram realizadas por meio de reuniões na plataforma Teams, a análise do sistema realizada em um dia e a implementação em outro, com base as etapas foram desenvolvidas o arquivo foi sendo complementado.  
 
 ## Implementação
 
@@ -228,3 +232,4 @@ Conclui-se, portanto, que a escolha do padrão Command foi apropriada, resultand
 | ------ | ----------- | ----------- | --------- | ----------- | --------------------|
 | `1.0`  | 16/10/2025 | Implementação inicial do Command                 |[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
 | `1.1`  | 17/10/2025 | Diagrama UML                 |[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
+| `1.2`  | 20/10/2025 | Complementando introdução e metodologia|[Julia Gabriela](https://github.com/JuliaGabP) e [João Pedro Costa](https://github.com/johnaopedro)|-|-|
