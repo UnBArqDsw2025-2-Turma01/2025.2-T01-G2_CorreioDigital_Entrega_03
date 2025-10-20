@@ -18,29 +18,169 @@ Dessa forma, garantiu-se que o projeto mantivesse alta **coesão interna** e bai
 
 ## Implementação
 
-
-### Estrutura Base
-
-
-### Exemplo de Uso no Sistema
-
-
-### Diagrama UML da Implementação
-
 **Figura 1:** Diagrama UML Padrão Strategy  
 
 ![Diagrama UML Strategy](../../Assets/strategy.png)
 
-## Considerações de Projeto
+### Aplicação em código
 
+O padrão Strategy foi aplicado para permitir que cada funcionalidade do sistema como moderação, ordenação de posts, envio de mensagens e notificações, possa ter múltiplas variações de comportamento intercambiáveis, sem alterar o código das classes principais. Os componentes concretos podem ser encontrados [aqui](/docs/PadroesDeProjeto/GoFsCriacionais/factorymethod.md).
 
-### Vantagens Obtidas no CorreioDigital
+**Moderação**
 
+A estratégia de Moderação define diferentes abordagens para o tratamento de denúncias dentro da plataforma. Por meio desse padrão, o sistema pode aplicar ações específicas conforme o tipo de denúncia, seja analisando publicações reportadas ou gerenciando usuários que violam as diretrizes, sem modificar a lógica central do moderador.
 
-### Pontos de Atenção
+```java
+interface ModeracaoStrategy {
+    void analisar(Denuncia denuncia, Moderador moderador);
+}
 
+class ModeracaoPostStrategy implements ModeracaoStrategy {
+    @Override
+    public void analisar(Denuncia denuncia, Moderador moderador) {
+        System.out.println("[Strategy] Revisando post denunciado...");
+        if (denuncia.getPost() != null && denuncia.getPost().isInadequado()) {
+            moderador.excluirPost(denuncia.getPost());
+            denuncia.resolve("Post removido via strategy");
+        } else {
+            denuncia.resolve("Post está adequado");
+        }
+    }
+}
 
-## Conclusão
+class ModeracaoUsuarioStrategy implements ModeracaoStrategy {
+    @Override
+    public void analisar(Denuncia denuncia, Moderador moderador) {
+        if (denuncia.getReportedUser() != null) {
+            moderador.banirUsuario(denuncia.getReportedUser());
+            denuncia.resolve("Usuário banido via strategy");
+        } else {
+            denuncia.resolve("Denúncia sem usuário associado");
+        }
+    }
+}
+```
+
+**Ordenação de Posts**
+
+A estratégia de Ordenação de Posts permite que o sistema adapte dinamicamente a forma como as publicações são exibidas aos usuários. Assim, é possível alternar entre diferentes critérios de priorização, como número de curtidas ou data de criação, garantindo maior flexibilidade na personalização do feed.
+
+```java
+interface OrdenacaoPostStrategy {
+    List<Post> ordenar(List<Post> posts);
+}
+
+class OrdenarPorLikes implements OrdenacaoPostStrategy {
+    @Override
+    public List<Post> ordenar(List<Post> posts) {
+        posts.sort((a, b) -> b.likes - a.likes);
+        return posts;
+    }
+}
+
+class OrdenarPorData implements OrdenacaoPostStrategy {
+    @Override
+    public List<Post> ordenar(List<Post> posts) {
+        posts.sort((a, b) -> b.createdAt.compareTo(a.createdAt));
+        return posts;
+    }
+}
+```
+
+**Entrega de Mensagens**
+
+A estratégia de Entrega de Mensagens foi projetada para definir diferentes modos de envio de mensagens dentro do chat. Ela permite que o sistema alterne entre entregas imediatas e agendadas, mantendo o comportamento modular e facilmente extensível a novos tipos de envio.
+
+```java
+interface EntregaMensagemStrategy {
+    void entregar(Mensagem m);
+}
+
+class EntregaImediata implements EntregaMensagemStrategy {
+    @Override
+    public void entregar(Mensagem m) {
+        System.out.println("[Entrega imediata] " + m.summary());
+        m.deliver();
+    }
+}
+
+class EntregaAgendada implements EntregaMensagemStrategy {
+    @Override
+    public void entregar(Mensagem m) {
+        System.out.println("[Entrega agendada] Mensagem " + m.summary() + " será enviada em 5 minutos.");
+    }
+}
+
+```
+
+**Notificações**
+
+A estratégia de Notificações implementa diferentes níveis de prioridade para o envio de alertas aos usuários. Essa abordagem torna o sistema mais flexível e adaptável, permitindo distinguir entre notificações simples e urgentes de forma transparente e reutilizável.
+
+```java
+interface NotificacaoStrategy {
+    void enviar(Notificacao n);
+}
+
+class NotificacaoSimples implements NotificacaoStrategy {
+    @Override
+    public void enviar(Notificacao n) {
+        n.deliver();
+    }
+}
+
+class NotificacaoUrgente implements NotificacaoStrategy {
+    @Override
+    public void enviar(Notificacao n) {
+        System.out.println("🚨 URGENTE 🚨");
+        n.deliver();
+    }
+}
+```
+
+### Exemplo de Uso
+
+O exemplo de uso a seguir demonstra, de forma prática, como as diferentes estratégias implementadas no sistema podem ser aplicadas em situações reais, como a moderação de denúncias, a ordenação de publicações, o envio de mensagens e notificações. Ele mostra a interação entre usuários e moderadores, ilustrando como o padrão Strategy permite alternar dinamicamente o comportamento das funcionalidades sem modificar o código principal das classes envolvidas.
+
+```java
+class StrategyDemo {
+    public static void main(String[] args) {
+        // Criando perfil e usuários
+        Perfil p1 = new Perfil("João", "Aprendendo inglês");
+        Usuario joao = new Usuario("u1", "joao", "joao@email.com", p1);
+
+        Perfil p2 = new Perfil("Maria", "Moderadora ativa");
+        Moderador maria = new Moderador("u2", "maria", "maria@email.com", p2);
+
+        // Criando um post denunciado
+        Post post = new PostTexto("p1", joao, "Conteúdo suspeito...");
+        Denuncia denuncia = new Denuncia("d1", joao, "post", "spam");
+        denuncia.attachPost(post);
+
+        // Aplicando estratégia de moderação
+        ModeracaoStrategy modStrategy = new ModeracaoPostStrategy();
+        modStrategy.analisar(denuncia, maria);
+
+        // Estratégia de ordenação de posts
+        List<Post> posts = new ArrayList<>();
+        posts.add(post);
+        posts.add(new PostTexto("p2", maria, "Olá comunidade!"));
+
+        OrdenacaoPostStrategy ordem = new OrdenarPorData();
+        ordem.ordenar(posts);
+
+        // Estratégia de envio de mensagens
+        Mensagem msg = new MensagemTexto("m1", joao, maria, "Oi Maria!");
+        EntregaMensagemStrategy entrega = new EntregaImediata();
+        entrega.entregar(msg);
+
+        // Estratégia de notificação
+        Notificacao notif = new NotificacaoMensagem("n1", joao, "Nova amizade sugerida!");
+        NotificacaoStrategy notifStrat = new NotificacaoUrgente();
+        notifStrat.enviar(notif);
+    }
+}
+```
 
 
 ## Bibliografia
@@ -55,3 +195,4 @@ Dessa forma, garantiu-se que o projeto mantivesse alta **coesão interna** e bai
 | ------ | ----------- | ----------- | --------- | ----------- | --------------------|
 | `1.0`  | 19/10/2025 | Criação do esqueleto do documento |[Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim)|-|-|
 | `1.1`  | 19/10/2025 | Criação da introdução, metodogia e diagrama UML do padrão strategy |[Túlio Augusto Celeri](https://github.com/TulioCeleri) e [Pedro Ferreira Gondim](https://github.com/G0ndim)|-|-|
+| `1.2`  | 20/10/2025  | Adição da implementação em código do strategy | [Pedro Ferreira Gondim](https://github.com/G0ndim) e [Túlio Augusto Celeri](https://github.com/TulioCeleri) |-|-|
