@@ -364,11 +364,96 @@ def test_google_adapter_success(monkeypatch):
 
 2. Pode mascarar diferenças significativas entre APIs (ex.: limites, latência, qualidade da tradução).
 
+---
+
+## Estrutura do Projeto e Como Executar
+
+### Estrutura Organizada (Padrão OOP)
+
+A implementação completa do padrão Adapter no CorreioDigital está organizada em:
+
+```
+src/Estruturais/correio_digital_adapter/correio_digital/
+├── __init__.py           # Exports dos símbolos públicos
+├── models.py             # Modelo Mensagem (dataclass)
+├── adapter_pattern.py    # Interfaces (ITradutor, TraducaoError)
+├── adaptadores.py        # APIs externas e Adaptadores (Google, DeepL)
+└── servico.py           # ServicoTraducao (Client com fallback)
+
+main_adapter.py          # Demonstração completa do padrão
+tests/test_adapter.py    # Suite de testes unitários (22 testes)
+```
+
+### Como Executar a Demonstração
+
+```bash
+# Na raiz do projeto
+python3 main_adapter.py
+```
+
+A demonstração mostra:
+- Inicialização de APIs externas (Google Translate, DeepL)
+- Criação de adaptadores
+- Tradução com fallback automático
+- Casos especiais (idiomas iguais, sem idioma destino)
+- Funcionalidades específicas (quota DeepL)
+- Estatísticas e histórico
+
+### Como Executar os Testes
+
+```bash
+# Rodar todos os testes do Adapter
+python3 -m unittest tests/test_adapter.py -v
+
+# Ou usar pytest (se disponível)
+pytest tests/test_adapter.py -v
+```
+
+**Cobertura de testes:** 22 testes validando:
+- Adaptadores (Google e DeepL)
+- Serviço de tradução
+- Mecanismo de fallback
+- Modelo de dados (Mensagem)
+
+### Exemplo de Uso no Código
+
+```python
+from src.Estruturais.correio_digital_adapter.correio_digital import (
+    Mensagem,
+    GoogleTranslateAPI,
+    DeepLAPI,
+    GoogleAdapter,
+    DeepLAdapter,
+    ServicoTraducao
+)
+
+# 1. Configurar APIs e Adaptadores
+google_adapter = GoogleAdapter(GoogleTranslateAPI())
+deepl_adapter = DeepLAdapter(DeepLAPI())
+
+# 2. Criar serviço com fallback
+servico = ServicoTraducao([google_adapter, deepl_adapter])
+
+# 3. Traduzir mensagem
+mensagem = Mensagem(
+    conteudo="Olá, mundo!",
+    idioma_origem="PT",
+    idioma_destino="EN",
+    remetente="user@correio.com",
+    destinatario="friend@correio.com"
+)
+
+servico.traduzir_mensagem(mensagem)
+print(mensagem.obter_texto_exibicao())
+```
+
+---
+
 ## Bibliografia 
 
 - Gamma, E., Helm, R., Johnson, R., & Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994.
 
-- Freeman, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O’Reilly Media.
+- Freeman, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O'Reilly Media.
 [Explicação didática e exemplos práticos de padrões, incluindo Adapter.](https://raw.githubusercontent.com/ajitpal/BookBank/master/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D.pdf)
 
 ## Referências 
@@ -381,3 +466,4 @@ Refactoring Guru. Adapter Design Pattern. Disponível em: https://refactoring.gu
 |--------|-----------|-----------------------------|-----------|-------------|----------|
 | `1.0`  | 13/10/2025 | Criação inicial do documento Adapter, adicionando introdução, metodologia, desenvolvimento (Estrutura UML, Exemplo de Código, Aplicação no CorreioDigital, Vantagens e Desvantagens), Bibliografia, Referências, e  Histórico de Versões |[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.1`  | 13/10/2025 | Adições: consolidação em 3 exemplos (versão histórica em Python; versão robusta em Python com ITradutor, adapters, fallback e testes; exemplo em TypeScript), criação de módulos Python reais (interfaces, adapters, fallback), e inclusão de testes pytest (`tests/test_adapter.py`). Atualização das seções com contextos de uso, UML e sugestões de localização no repo. | [Esther Sena](https://github.com/esmsena) | - | - |
+| `1.2`  | 21/10/2025 | Reorganização completa seguindo padrão OOP: criação de estrutura em `src/Estruturais/correio_digital_adapter/correio_digital/` com módulos organizados ; implementação de `main_adapter.py` para demonstração; atualização de tests com 22 testes unitários; adição de seção "Estrutura do Projeto e Como Executar" com instruções práticas. | [Esther Sena](https://github.com/esmsena) | - | - |
