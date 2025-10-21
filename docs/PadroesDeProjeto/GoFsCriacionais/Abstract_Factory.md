@@ -175,12 +175,12 @@ SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemak
 
 ## **8. Implementação Real (Código Java)**
 
-A implementação completa do padrão Abstract Factory está disponível na pasta `code/abstractfactory/` e inclui:
+A implementação completa do padrão Abstract Factory está disponível na pasta `src/Criacionais/abstractfactory/` e inclui:
 
 ###  **Estrutura da Implementação**
 
 ```
-code/abstractfactory/
+src/Criacionais/abstractfactory/
 ├── interfaces/                    # Interfaces abstratas
 │   ├── Message.java              # Interface para mensagens
 │   ├── Sender.java               # Interface para remetentes
@@ -206,7 +206,7 @@ code/abstractfactory/
 
 ```bash
 # Navegar para o diretório
-cd docs/PadroesDeProjeto/GoFsCriacionais/code/abstractfactory
+cd src/Criacionais/abstractfactory
 
 # Compilar o projeto
 javac -cp . Main.java
@@ -538,3 +538,4 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 | `1.2`  | 06/10/2025 | Revisão documental e adição de códigos de cada classe separada no documento, adição também da modelagem do campo Conteúdo|[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.3`  | 06/10/2025 | Arrumando caminho das imagens e corrigindo imagem das classes SmsMessage.java, SmsSender.java, SmsDeliveryService.java, SmsNotificationFactory.java|[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.4`  | 13/10/2025 | Atualiando metodologia pós revisão do pull request |[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
+| `1.5`  | 21/10/2025 | Reorganização da estrutura: código movido de `docs/` para `src/Criacionais/abstractfactory/` |[Esther Sena](https://github.com/esmsena) | - | - |
