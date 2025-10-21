@@ -1,7 +1,4 @@
-
-
 # Padrão de Projeto: Observer
-
 
 ## 1\. Introdução
 
@@ -134,25 +131,24 @@ classDiagram
     SistemaDeMensagens ..> Mensagem : armazena e notifica
 ```
 
----
+-----
 
-##  Adaptações em relação ao modelo original da professora apresentado em aula
+## Adaptações em relação ao modelo original da professora apresentado em aula
 
 Durante a aplicação do padrão **Observer** ao contexto do projeto **Correio Digital**, algumas adaptações foram necessárias para adequar o modelo de referência disponibilizado pela professora à realidade do sistema.
 
-| Elemento Original                                                               | Adaptação para o Correio Digital                                          | Justificativa                                                                                                                      |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `Subject`                                                                       | Mantido como interface principal (`Subject`)                              | Mantém a estrutura base do padrão e o princípio de desacoplamento.                                                                 |
-| `ConcreteSubject1`, `ConcreteSubject2`                                          | Substituídos por uma única classe `SistemaDeMensagens`                    | No Correio Digital, há apenas um fluxo principal de notificação, centralizado no envio de mensagens.                               |
-| `Observer`                                                                      | Mantido como interface (`Observer`)                                       | Essencial para garantir a flexibilidade e extensibilidade dos canais de notificação.                                               |
-| `ConcreteObserver1`, `ConcreteObserver2`                                        | Adaptados para `NotificadorWeb`, `NotificadorEmail` e `NotificadorMobile` | Representam os diferentes canais reais de notificação do sistema.                                                                  |
-| Parâmetro `update(subject)`                                                     | Alterado para `update(mensagem)`                                          | No contexto do projeto, a informação de interesse é a própria mensagem enviada, não o estado genérico do Subject.                  |
-| Classes de domínio genéricas (ex.: `SociedadeDeAgentes`, `ObservadorDeEstados`) | Removidas                                                                 | Não possuem relação direta com o escopo do Correio Digital e foram substituídas por elementos específicos do sistema de mensagens. |
+| Elemento Original | Adaptação para o Correio Digital | Justificativa |
+| :--- | :--- | :--- |
+| `Subject` | Mantido como interface principal (`Subject`) | Mantém a estrutura base do padrão e o princípio de desacoplamento. |
+| `ConcreteSubject1`, `ConcreteSubject2` | Substituídos por uma única classe `SistemaDeMensagens` | No Correio Digital, há apenas um fluxo principal de notificação, centralizado no envio de mensagens. |
+| `Observer` | Mantido como interface (`Observer`) | Essencial para garantir a flexibilidade e extensibilidade dos canais de notificação. |
+| `ConcreteObserver1`, `ConcreteObserver2` | Adaptados para `NotificadorWeb`, `NotificadorEmail` e `NotificadorMobile` | Representam os diferentes canais reais de notificação do sistema. |
+| Parâmetro `update(subject)` | Alterado para `update(mensagem)` | No contexto do projeto, a informação de interesse é a própria mensagem enviada, não o estado genérico do Subject. |
+| Classes de domínio genéricas (ex.: `SociedadeDeAgentes`, `ObservadorDeEstados`) | Removidas | Não possuem relação direta com o escopo do Correio Digital e foram substituídas por elementos específicos do sistema de mensagens. |
 
 Essas adaptações garantiram que o diagrama permanecesse fiel ao padrão **Observer**, mas contextualizado ao domínio do **Correio Digital**, tornando-o mais funcional e compreensível dentro do sistema de notificações.
 
----
-
+-----
 
 ## 4\. Implementação em Python
 
@@ -340,22 +336,6 @@ import unittest
 import io
 from contextlib import redirect_stdout
 
-# Importamos as classes do arquivo principal
-# (Assumindo que o código acima está salvo como "correio_digital.py")
-# Para rodar, salve o código acima como 'correio_digital.py'
-# e este código de teste como 'test_correio_digital.py'
-#
-# from correio_digital import (
-#     SistemaDeMensagens, 
-#     NotificadorWeb, 
-#     NotificadorEmail, 
-#     NotificadorMobile
-# )
-#
-# Como estamos no mesmo arquivo/contexto, vou apenas re-declarar as classes
-# para que este bloco seja autônomo. Em um projeto real, você usaria 'import'.
-
-
 class TestObserverPatternCorreioDigital(unittest.TestCase):
 
     def setUp(self):
@@ -440,11 +420,6 @@ class TestObserverPatternCorreioDigital(unittest.TestCase):
 
 # --- Bloco para rodar os testes ---
 if __name__ == "__main__":
-    # Para rodar os testes, comente o bloco "Exemplo de Uso" anterior
-    # e descomente a linha abaixo.
-    # unittest.main(argv=['first-arg-is-ignored'], exit=False)
-    
-    # Vamos rodar os testes diretamente aqui para demonstração
     print("\n" + "="*50)
     print("INICIANDO TESTES UNITÁRIOS...")
     print("="*50)
@@ -456,39 +431,30 @@ if __name__ == "__main__":
     runner.run(suite)
 ```
 
----
+-----
 
-## 6. Análise de Vantagens e Desvantagens
+## 6\. Análise de Vantagens e Desvantagens
 
 A aplicação do padrão Observer no "Correio Digital" traz benefícios claros, mas também impõe algumas considerações.
 
 ### 6.1. Vantagens
 
-Baixo Acoplamento (Desacoplamento): Esta é a principal vantagem. O SistemaDeMensagens (Subject) não conhece as classes concretas dos seus observadores (NotificadorWeb, NotificadorEmail, etc.). Ele apenas interage com a interface Observer. Isso significa que podemos adicionar, remover ou modificar notificadores sem nenhuma alteração no código do SistemaDeMensagens.
+  * **Baixo Acoplamento (Desacoplamento):** Esta é a principal vantagem. O `SistemaDeMensagens` (Subject) não conhece as classes concretas dos seus observadores (`NotificadorWeb`, `NotificadorEmail`, etc.). Ele apenas interage com a interface `Observer`. Isso significa que podemos adicionar, remover ou modificar notificadores sem nenhuma alteração no código do `SistemaDeMensagens`.
+  * **Adesão ao Princípio Aberto-Fechado (OCP):** O sistema está "aberto para extensão" (podemos facilmente adicionar novos observadores, como `NotificadorSMS` ou `NotificadorSlack`) e "fechado para modificação" (não precisamos alterar o `SistemaDeMensagens` para fazer isso).
+  * **Coesão:** A lógica de notificação é encapsulada em classes separadas e coesas (os Observadores). O `SistemaDeMensagens` foca apenas em sua responsabilidade principal: gerenciar mensagens.
+  * **Flexibilidade em Tempo de Execução:** As relações entre o sujeito e os observadores podem ser estabelecidas e desfeitas dinamicamente, em tempo de execução. Em nosso exemplo, o `NotificadorMobile` foi desanexado (`detach`) sem parar o sistema.
 
-Adesão ao Princípio Aberto-Fechado (OCP): O sistema está "aberto para extensão" (podemos facilmente adicionar novos observadores, como NotificadorSMS ou NotificadorSlack) e "fechado para modificação" (não precisamos alterar o SistemaDeMensagens para fazer isso).
+### 6.2. Desvantagens
 
-Coesão: A lógica de notificação é encapsulada em classes separadas e coesas (os Observadores). O SistemaDeMensagens foca apenas em sua responsabilidade principal: gerenciar mensagens.
-
-Flexibilidade em Tempo de Execução: As relações entre o sujeito e os observadores podem ser estabelecidas e desfeitas dinamicamente, em tempo de execução. Em nosso exemplo, o NotificadorMobile foi desanexado (detach) sem parar o sistema.
-
-###  6.2. Desvantagens
-Ordem de Notificação Imprevisível: O padrão não garante a ordem em que os observadores serão notificados. Em nossa implementação (usando uma lista), a ordem é a de inserção, mas depender disso é uma má prática. Se a ordem for crítica (ex: um log deve ser escrito antes de um e-mail ser enviado), o padrão Observer puro pode não ser suficiente, exigindo uma camada adicional de gerenciamento.
-
-Notificações Inesperadas (Efeito Cascata): Se um observador, ao ser atualizado, causar uma mudança em outro objeto que também é um sujeito, isso pode levar a uma cascata de atualizações complexa e difícil de depurar.
-
-Gerenciamento de "Observadores Mortos" (Memory Leaks): Se um observador for destruído (ex: o usuário fecha a janela do navegador representada pelo NotificadorWeb), mas não for explicitamente desanexado (detach) do sujeito, o sujeito continuará mantendo uma referência a ele. Isso pode impedir o garbage collector de liberar a memória, causando um memory leak. É crucial garantir que o ciclo de vida do observador inclua um detach.
+  * **Ordem de Notificação Imprevisível:** O padrão não garante a ordem em que os observadores serão notificados. Em nossa implementação (usando uma lista), a ordem é a de inserção, mas depender disso é uma má prática. Se a ordem for crítica (ex: um log deve ser escrito antes de um e-mail ser enviado), o padrão Observer puro pode não ser suficiente, exigindo uma camada adicional de gerenciamento.
+  * **Notificações Inesperadas (Efeito Cascata):** Se um observador, ao ser atualizado, causar uma mudança em outro objeto que também é um sujeito, isso pode levar a uma cascata de atualizações complexa e difícil de depurar.
+  * **Gerenciamento de "Observadores Mortos" (Memory Leaks):** Se um observador for destruído (ex: o usuário fecha a janela do navegador representada pelo `NotificadorWeb`), but not for explicitamente desanexado (`detach`) do sujeito, o sujeito continuará mantendo uma referência a ele. Isso pode impedir o garbage collector de liberar a memória, causando um *memory leak*. É crucial garantir que o ciclo de vida do observador inclua um `detach`.
 
 
-## Bibliografia
 
-- Material da disciplina: Aula GoFs Comportamentais (Prof. Milene) — PDF e vídeo.
-- Sourcemaking: https://sourcemaking.com/design_patterns/observer/java/1
-- Tutorialspoint: https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+-----
 
----
-
-## 7. Estrutura do Projeto e Como Executar
+## 7\. Estrutura do Projeto e Como Executar
 
 ### 7.1. Organização das Pastas
 
@@ -499,7 +465,7 @@ O projeto está organizado seguindo as melhores práticas de desenvolvimento Pyt
 ├── docs/
 │   └── PadroesDeProjeto/
 │       └── GoFsComportamentais/
-│           └── Observer.md        <-- (Esta documentação)
+│           └── Observer.md           <-- (Esta documentação)
 │
 ├── src/
 │   ├── Comportamentais/
@@ -518,9 +484,9 @@ O projeto está organizado seguindo as melhores práticas de desenvolvimento Pyt
 │
 ├── tests/
 │   ├── __init__.py
-│   └── test_sistema.py            <-- (Testes unitários)
+│   └── test_sistema.py         <-- (Testes unitários)
 │
-└── main.py                        <-- (Script de demonstração)
+└── main.py                     <-- (Script de demonstração)
 ```
 
 ### 7.2. Como Executar a Demonstração
@@ -532,6 +498,7 @@ python main.py
 ```
 
 **Saída esperada:**
+
 ```
 ==================================================
 Iniciando Simulação do Correio Digital...
@@ -576,6 +543,7 @@ python -m unittest tests/test_sistema.py -v
 ```
 
 **Saída esperada dos testes:**
+
 ```
 test_attach_and_notify_all_observers (__main__.TestObserverPatternCorreioDigital) ... ok
 test_detach_non_existent_observer (__main__.TestObserverPatternCorreioDigital) ... ok
@@ -591,33 +559,47 @@ OK
 ### 7.4. Arquivos Principais
 
 #### `src/correio_digital/models.py`
+
 Define a classe `Mensagem` usando `@dataclass` para representar uma mensagem no sistema.
 
 #### `src/correio_digital/observer_pattern.py`
+
 Define as interfaces abstratas `Observer` e `Subject` usando `abc.ABCMeta`.
 
 #### `src/correio_digital/notificadores.py`
+
 Implementa os observadores concretos: `NotificadorWeb`, `NotificadorEmail` e `NotificadorMobile`.
 
 #### `src/correio_digital/sistema.py`
+
 Implementa o sujeito concreto `SistemaDeMensagens` que gerencia mensagens e notifica observadores.
 
 #### `main.py`
+
 Script de demonstração que simula o fluxo completo do sistema.
 Importante: como o pacote foi movido para `src/Comportamentais/correio_digital_observer/correio_digital`, os imports no `main.py` e em `tests/test_sistema.py` usam:
 
-```
+```python
 from src.Comportamentais.correio_digital_observer.correio_digital import (...)
 ```
 
 #### `tests/test_sistema.py`
+
 Testes unitários que validam o comportamento do padrão Observer.
 
----
+-----
+## Bibliografia
 
+  * Material da disciplina: Aula GoFs Comportamentais (Prof. Milene) — PDF e vídeo.
+  * REFACTORING GURU. Observer Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/observer. Acesso em: 2 jun. 2025.
+  * Sourcemaking: [https://sourcemaking.com/design\_patterns/observer/java/1](https://sourcemaking.com/design_patterns/observer/java/1)
+  * Tutorialspoint: [https://www.tutorialspoint.com/design\_pattern/observer\_pattern.htm](https://www.tutorialspoint.com/design_pattern/observer_pattern.htm)
+  * GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
+
+----
 ## Histórico de Versões
 
-| Versão |     Data    | Descrição   | Autor(es) | Revisor(es) | Detalhes da revisão |
-| ------ | ----------- | ----------- | --------- | ----------- | --------------------|
-| `1.0`  | 17/10/2025  | Criação do documento, exemplo Python e testes; | Esther Sena | - | - |
-| `2.0`  | 21/10/2025  | Adição da implementação completa do Correio Digital com estrutura de projeto | Esther Sena | - | - |
+| Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhes da revisão |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `1.0` | 17/10/2025 | Criação do documento baseado em UML criado por nós, exemplo Python e testes; | Esther Sena | - | - |
+| `1.2` | 21/10/2025 | Adição da complementar da estrutura com códigos feito a partir de nossa estrutura UML, juntamente com uma analise superio comparando com exemplo dado em sala de aula, e também adicionando uma explicação melhor do documento juntamente com sua estrutura | Esther Sena | - | - |
