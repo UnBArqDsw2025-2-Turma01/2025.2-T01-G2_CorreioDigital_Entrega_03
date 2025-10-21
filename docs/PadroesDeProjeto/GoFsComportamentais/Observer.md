@@ -4,7 +4,7 @@
 
 O Observer é um padrão de projeto comportamental. Ele define uma relação de dependência "um-para-muitos" entre objetos, de forma que, quando um objeto (o "Subject" ou "Observado") muda seu estado, todos os seus dependentes (os "Observers" ou "Observadores") são notificados e atualizados automaticamente.
 
-Este padrão promove um baixo acoplamento entre o Sujeito e seus Observadores. O Sujeito não precisa saber nada sobre as classes concretas dos seus observadores; ele apenas se comunica com eles através de uma interface comum (`Observer`).
+Este padrão promove um baixo acoplamento entre o Sujeito e seus Observadores. O Sujeito não precisa saber nada sobre as classes concretas dos seus observadores; ele apenas se comunica com eles através de uma interface comum (`Observer`). [[1](#ref1),[2](#ref2)].
 
 ## 2\. Contextualização no Projeto (Correio Digital)
 
@@ -31,6 +31,8 @@ Para resolver isso, aplicamos o padrão Observer.
       * Cada observador, ao receber a notificação, executa sua lógica específica (enviar e-mail, push web, etc.).
 
 Isso desacopla o sistema: o `SistemaDeMensagens` não sabe (e não precisa saber) o que cada notificador faz; ele apenas sabe que eles implementam a interface `Observer` e possuem um método `update()`.
+
+[[1](#ref1)]
 
 ## 3\. Diagramas UML
 
@@ -130,6 +132,7 @@ classDiagram
     SistemaDeMensagens o--> "*" Observer : notifica
     SistemaDeMensagens ..> Mensagem : armazena e notifica
 ```
+[[1](#ref1),[2](#ref2)]]
 
 -----
 
@@ -147,6 +150,8 @@ Durante a aplicação do padrão **Observer** ao contexto do projeto **Correio D
 | Classes de domínio genéricas (ex.: `SociedadeDeAgentes`, `ObservadorDeEstados`) | Removidas | Não possuem relação direta com o escopo do Correio Digital e foram substituídas por elementos específicos do sistema de mensagens. |
 
 Essas adaptações garantiram que o diagrama permanecesse fiel ao padrão **Observer**, mas contextualizado ao domínio do **Correio Digital**, tornando-o mais funcional e compreensível dentro do sistema de notificações.
+
+[[1](#ref1)]
 
 -----
 
@@ -326,6 +331,9 @@ if __name__ == "__main__":
     print("\n" + "="*50)
     print("Execução finalizada.")
 ```
+[[3](#ref3),[4](#ref4)]
+
+---
 
 ## 5\. Testes Unitários
 
@@ -430,6 +438,7 @@ if __name__ == "__main__":
     runner = unittest.TextTestRunner()
     runner.run(suite)
 ```
+[[3](#ref3),[4](#ref4)]
 
 -----
 
@@ -450,7 +459,7 @@ A aplicação do padrão Observer no "Correio Digital" traz benefícios claros, 
   * **Notificações Inesperadas (Efeito Cascata):** Se um observador, ao ser atualizado, causar uma mudança em outro objeto que também é um sujeito, isso pode levar a uma cascata de atualizações complexa e difícil de depurar.
   * **Gerenciamento de "Observadores Mortos" (Memory Leaks):** Se um observador for destruído (ex: o usuário fecha a janela do navegador representada pelo `NotificadorWeb`), but not for explicitamente desanexado (`detach`) do sujeito, o sujeito continuará mantendo uma referência a ele. Isso pode impedir o garbage collector de liberar a memória, causando um *memory leak*. É crucial garantir que o ciclo de vida do observador inclua um `detach`.
 
-
+[[3](#ref3),[4](#ref4)]
 
 -----
 
@@ -587,14 +596,16 @@ from src.Comportamentais.correio_digital_observer.correio_digital import (...)
 
 Testes unitários que validam o comportamento do padrão Observer.
 
+Tópico 7 - [[3](#ref3),[4](#ref4)]
+
 -----
 ## Bibliografia
 
-  * Material da disciplina: Aula GoFs Comportamentais (Prof. Milene) — PDF e vídeo.
-  * REFACTORING GURU. Observer Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/observer. Acesso em: 2 jun. 2025.
-  * Sourcemaking: [https://sourcemaking.com/design\_patterns/observer/java/1](https://sourcemaking.com/design_patterns/observer/java/1)
-  * Tutorialspoint: [https://www.tutorialspoint.com/design\_pattern/observer\_pattern.htm](https://www.tutorialspoint.com/design_pattern/observer_pattern.htm)
-  * GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
+  1. <a id="ref1"></a>Material da disciplina: Aula GoFs Comportamentais (Prof. Milene) — PDF e vídeo.
+  2. <a id="ref2"></a>REFACTORING GURU. Observer Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/observer. Acesso em: 2 jun. 2025.
+  3. <a id="ref3"></a>Sourcemaking: [https://sourcemaking.com/design\_patterns/observer/java/1](https://sourcemaking.com/design_patterns/observer/java/1)
+  4. <a id="ref4"></a>Tutorialspoint: [https://www.tutorialspoint.com/design\_pattern/observer\_pattern.htm](https://www.tutorialspoint.com/design_pattern/observer_pattern.htm)
+  5. <a id="ref5"></a>GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
 
 ----
 ## Histórico de Versões
