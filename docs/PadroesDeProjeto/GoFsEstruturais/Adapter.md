@@ -451,14 +451,16 @@ print(mensagem.obter_texto_exibicao())
 
 ## Bibliografia 
 
-- Gamma, E., Helm, R., Johnson, R., & Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994.
+- GAMMA, E., Helm, R., Johnson, R., & Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994.
 
-- Freeman, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O'Reilly Media.
+- FREEMAN, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O'Reilly Media.
 [Explicação didática e exemplos práticos de padrões, incluindo Adapter.](https://raw.githubusercontent.com/ajitpal/BookBank/master/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D.pdf)
 
-## Referências 
+- REFACTORING GURU. Adapter Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/adapter. Acesso em: 30 mai. 2025.
 
-Refactoring Guru. Adapter Design Pattern. Disponível em: https://refactoring.guru/design-patterns/adapter.
+- SERRANO, Milene. Arquitetura e Desenho de Software - Aula GoFs Estruturais. [Material de aula em PDF]. Brasília: UnB Gama, [s.d., Acesso em 10 de outubro. 2025].
+
+---
 
 ## Histórico de Versões
 
