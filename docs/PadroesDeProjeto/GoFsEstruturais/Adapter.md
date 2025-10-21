@@ -3,7 +3,7 @@
 ## Introdução
 O padrão Adapter, pertencente ao grupo de padrões estruturais da Gang of Four (GoF), tem como principal função permitir que classes com interfaces incompatíveis possam trabalhar juntas. Ele atua como um tradutor entre diferentes componentes do sistema, convertendo chamadas de uma interface para outra esperada pelo cliente.  
 
-No contexto do CorreioDigital, esse padrão é aplicado para integrar o sistema com APIs externas de tradução automática, garantindo que o módulo de chat consiga traduzir mensagens de forma transparente, independentemente da API utilizada (ex.: Google Translate, DeepL, etc.).
+No contexto do CorreioDigital, esse padrão é aplicado para integrar o sistema com APIs externas de tradução automática, garantindo que o módulo de chat consiga traduzir mensagens de forma transparente, independentemente da API utilizada (ex.: Google Translate, DeepL, etc.). [[1](#ref1),[2](#ref2)]
 
 ---
 
@@ -17,6 +17,8 @@ A elaboração do artefato envolveu:
 3. Definição de uma interface padrão (`ITradutor`).
 4. Implementação de adaptadores para diferentes serviços externos.
 5. Representação do fluxo de comunicação no diagrama UML.
+
+[[1](#ref1),[2](#ref2)]
 
 ---
 
@@ -72,6 +74,8 @@ Compare rapidamente com padrões próximos:
 - Bridge: separa abstração da implementação para variar ambas independentemente; útil quando há hierarquias de abstração/implementação.
 - Proxy: controla acesso ao objeto real (controle de acesso, lazy load); não transforma a interface.
 
+  [[1](#ref1),[2](#ref2)]
+
 ### 1.2 Sequence Diagram (fluxo de chamada)
 
 ```mermaid
@@ -86,6 +90,10 @@ sequenceDiagram
     Adapter-->>Chat: texto traduzido (no formato esperado)
 ```
 
+[[3](#ref3),[4](#ref4)]
+
+---
+
 ### 2. Exemplos (3)
 
 Este documento apresenta três exemplos didáticos do padrão Adapter:
@@ -93,6 +101,8 @@ Este documento apresenta três exemplos didáticos do padrão Adapter:
 - Exemplo 1 — Versão simples (histórica) em Python (mantém o exemplo original).
 - Exemplo 2 — Versão robusta em Python (ITradutor como interface/ABC, adaptadores com tratamento de erro e fallback). Inclui teste pytest minimal.
 - Exemplo 3 — Exemplo em TypeScript (Node.js) para ilustrar aplicação em projetos JS/TS.
+
+[[3](#ref3),[4](#ref4)]
 
 ---
 
@@ -446,19 +456,20 @@ mensagem = Mensagem(
 servico.traduzir_mensagem(mensagem)
 print(mensagem.obter_texto_exibicao())
 ```
+[[3](#ref3),[4](#ref4)]
 
 ---
 
 ## Bibliografia 
 
-- GAMMA, E., Helm, R., Johnson, R., & Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994.
+1. <a id="ref1"></a>GAMMA, E., Helm, R., Johnson, R., & Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994.
 
-- FREEMAN, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O'Reilly Media.
+2. <a id="ref2"></a>FREEMAN, E., Robson, E., Bates, B., & Sierra, K. (2004). Head First Design Patterns. O'Reilly Media.
 [Explicação didática e exemplos práticos de padrões, incluindo Adapter.](https://raw.githubusercontent.com/ajitpal/BookBank/master/%5BO%60Reilly.%20Head%20First%5D%20-%20Head%20First%20Design%20Patterns%20-%20%5BFreeman%5D.pdf)
 
-- REFACTORING GURU. Adapter Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/adapter. Acesso em: 30 mai. 2025.
+3. <a id="ref3"></a>REFACTORING GURU. Adapter Pattern. Refactoring Guru, [s.d.]. Disponível em: https://refactoring.guru/design-patterns/adapter. Acesso em: 30 mai. 2025.
 
-- SERRANO, Milene. Arquitetura e Desenho de Software - Aula GoFs Estruturais. [Material de aula em PDF]. Brasília: UnB Gama, [s.d., Acesso em 10 de outubro. 2025].
+4. <a id="ref4"></a>SERRANO, Milene. Arquitetura e Desenho de Software - Aula GoFs Estruturais. [Material de aula em PDF]. Brasília: UnB Gama, [s.d., Acesso em 10 de outubro. 2025].
 
 ---
 
