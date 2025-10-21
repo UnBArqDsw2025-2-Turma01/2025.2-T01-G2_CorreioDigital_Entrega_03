@@ -601,5 +601,5 @@ Testes unitários que validam o comportamento do padrão Observer.
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhes da revisão |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `1.0` | 17/10/2025 | Criação do documento baseado em UML criado por nós, exemplo Python e testes; | Esther Sena | - | - |
-| `1.2` | 21/10/2025 | Adição da complementar da estrutura com códigos feito a partir de nossa estrutura UML, juntamente com uma analise superio comparando com exemplo dado em sala de aula, e também adicionando uma explicação melhor do documento juntamente com sua estrutura | Esther Sena | - | - |
+| `1.0` | 17/10/2025 | Criação do documento baseado em UML criado por nós, exemplo Python e testes; | [Esther Sena](https://github.com/esmsena) | - | - |
+| `1.2` | 21/10/2025 | Adição da complementar da estrutura com códigos feito a partir de nossa estrutura UML, juntamente com uma analise superio comparando com exemplo dado em sala de aula, e também adicionando uma explicação melhor do documento juntamente com sua estrutura | [Esther Sena ](https://github.com/esmsena) | - | - |
