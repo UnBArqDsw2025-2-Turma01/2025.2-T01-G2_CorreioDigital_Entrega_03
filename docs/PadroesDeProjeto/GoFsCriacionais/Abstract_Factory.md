@@ -1,4 +1,4 @@
-## **1. Introdução**
+## **Introdução**
 
 O Abstract Factory é um padrão de projeto criacional do GoF (Gang of Four) que visa fornecer uma interface para a criação de famílias de objetos relacionados ou dependentes, sem a necessidade de especificar suas classes concretas. Essencialmente, o padrão encapsula um grupo de fábricas individuais que possuem um tema em comum, permitindo que o código cliente crie objetos que pertencem a uma mesma família, garantindo sua compatibilidade.
 
@@ -6,13 +6,13 @@ No contexto do projeto **CorreioDigital**, este padrão será utilizado para ger
 
 [[2](#ref2)]
 
-## **2. Metodologia**
+## **Metodologia**
 
 Este documento foi elaborado por Mariiana Siqueira e Esther Sena segundo uma abordagem iterativa e incremental. Inicialmente foi definido o escopo e estrutura, seguida de pesquisa bibliográfica sobre o padrão Abstract Factory. Em seguida, elaboramos um esboço com texto, diagramas e exemplo de código, que foi revisado internamente. Posteriormente, implementamos e testamos o exemplo de código para validar a correção e coerência com o texto. 
 
 [[1](#ref1),[2](#ref2)]
 
-## **3. Problema**
+## **Problema**
 
 O sistema **CorreioDigital** precisa de um mecanismo flexível para enviar notificações aos usuários através de múltiplos canais. Inicialmente, podemos ter canais como E-mail e SMS, mas a arquitetura deve estar preparada para a futura inclusão de outros, como Notificações Push ou mensagens no WhatsApp.
 
@@ -26,7 +26,7 @@ Uma abordagem ingênua seria instanciar esses objetos diretamente no código cli
 
 [[2](#ref2)]
 
-## **4. Solução**
+## **Solução**
 
 Para resolver esse problema, aplicaremos o padrão Abstract Factory. A solução consiste em definir uma interface abstrata, `FabricaDeNotificacao`, que declara métodos para criar cada um dos objetos da família de notificação (`criarMensagem`, `criarRemetente`, `criarServicoDeEnvio`).
 
@@ -39,7 +39,7 @@ O código cliente (`ServicoDeNotificacao`) dependerá apenas da interface `Fabri
 
 [[1](#ref1),[2](#ref2)],[3](#ref3),[6](#ref6)]
 
-## **5. Estrutura (Diagrama UML)**
+## **Estrutura (Diagrama UML)**
 
 A imagem do diagrama a seguir ilustra a estrutura das classes e interfaces envolvidas na solução.
 
@@ -132,7 +132,7 @@ classDiagram
     ServicoDeEnvio <|-- ServicoDeEnvioSms
 ```
 
-#### 5.1. Modelagem do Factory Method para Conteúdo
+#### Modelagem do Factory Method para Conteúdo
 
 A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
 
@@ -147,7 +147,9 @@ A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
 
 [[3](#ref3),[6](#ref6)]
 
-## **6. Participantes**
+---
+
+## **Participantes**
 
   * **`FabricaDeNotificacao` (AbstractFactory)**: Interface que declara as operações de criação para cada produto abstrato (ex: `criarMensagem()`).
   * **`FabricaDeNotificacaoEmail`, `FabricaDeNotificacaoSms` (ConcreteFactory)**: Classes que implementam a `AbstractFactory` para criar uma família de produtos concretos.
@@ -155,7 +157,9 @@ A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
   * **`MensagemEmail`, `MensagemSms`, etc. (ConcreteProduct)**: Implementações concretas dos produtos que são criados pelas fábricas concretas.
   * **`ServicoDeNotificacao` (Client)**: A classe que utiliza as interfaces `AbstractFactory` e `AbstractProduct` para realizar seu trabalho, permanecendo desacoplada das implementações concretas.
 
-## **7. Consequências da Utilização do Padrão**
+---
+
+## **Consequências da Utilização do Padrão**
 
 **Vantagens:**
 
@@ -169,7 +173,9 @@ A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
   * **Aumento da Complexidade:** A introdução do padrão adiciona várias novas interfaces e classes ao sistema, o que pode aumentar a complexidade inicial do código.
   * **Dificuldade para Adicionar Novos Produtos:** Adicionar um novo tipo de produto à família (ex: um `Anexo`) exige a alteração da interface da `AbstractFactory` e de todas as suas subclasses concretas, o que pode ser uma mudança custosa.
 
-## **8. Implementação Real (Código Java)**
+---
+
+## **Implementação Real (Código Java)**
 
 A implementação completa do padrão Abstract Factory está disponível na pasta `src/Criacionais/abstractfactory/` e inclui:
 
@@ -238,7 +244,7 @@ smsService.sendNotification("+5561999999999", "Sua fatura chegou!");
 
 ---
 
-## **8.1. Detalhes da Implementação (Código Java)**
+## **Detalhes da Implementação (Código Java)**
 
 **1. Interfaces dos Produtos (AbstractProduct)**
 
@@ -506,7 +512,7 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 
  
   
-#### 8.6. Benefícios da Abordagem
+####  **Benefícios da Abordagem**
 
   * **Isolamento das Classes Concretas**: O cliente interage apenas com as interfaces (`NotificationFactory`, `Message`). As implementações concretas podem ser trocadas facilmente sem alterar o código do cliente.
   * **Facilidade para Adicionar Novos Canais**: Para adicionar suporte a notificações *Push*, basta criar uma `PushNotificationFactory` e as classes de produto correspondentes (`PushMessage`, etc.). Nenhuma alteração é necessária no `NotificationService`.
@@ -517,7 +523,7 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 
 ---
 
-## **9. Referências**
+## **Referências**
 
   1. <a id="ref1"></a>SERRANO, M. Arquitetura e Desenho de Software – Aula GoFs Criacionais. Universidade de Brasília, 2025. Material em PDF fornecido em aula.
   2. <a id="ref2">GAMMA, E. et al. **Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos**. Bookman, 2000.
@@ -539,3 +545,4 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 | `1.3`  | 06/10/2025 | Arrumando caminho das imagens e corrigindo imagem das classes SmsMessage.java, SmsSender.java, SmsDeliveryService.java, SmsNotificationFactory.java|[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.4`  | 13/10/2025 | Atualiando metodologia pós revisão do pull request |[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.5`  | 21/10/2025 | Reorganização da estrutura: código movido de `docs/` para `src/Criacionais/abstractfactory/` e linkagem nas referencias |[Esther Sena](https://github.com/esmsena) | - | - |
+| `1.6`  | 21/10/2025 | Ajustando estrutura documental |[Esther Sena](https://github.com/esmsena) | - | - |
