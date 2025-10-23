@@ -75,8 +75,7 @@ O diagrama, presente na figura abaixo, representa o diagrama específico do Obse
     <br>
     <img src="../../Assets/ObserverCorreioDigital.png" width="1200">
     <br>
-    <b>Autora: </b><a href="https://github.com/Maryyscreuza">Mariiana Siqueira</a>. 
-    <br> 
+    <b>Autoras:</b> <a href="https://github.com/esmsena">Esther Sena</a> e <a href="https://github.com/Maryyscreuza">Mariiana Siqueira</a>. 
     <br> 
 </div>
 
@@ -672,3 +671,4 @@ A aplicação do padrão Observer no "Correio Digital" traz benefícios claros, 
 | `1.0` | 17/10/2025 | Criação do documento baseado em UML criado por nós, exemplo Python e testes; | [Esther Sena](https://github.com/esmsena) | - | - |
 | `1.1` | 21/10/2025 | Adição da complementar da estrutura com códigos feito a partir de nossa estrutura UML, juntamente com uma analise superio comparando com exemplo dado em sala de aula, e também adicionando uma explicação melhor do documento juntamente com sua estrutura | [Esther Sena ](https://github.com/esmsena) | - | - |
 | `1.2` | 21/10/2025 | Atualização da introdução com os pontos focais do CorreioDigital, atualização estrutural do documento, adição da imagem do diagrama genérico e inserção do diagrama do nosso projeto. | [Mariiana Neris](https://github.com/Maryyscreuza) | - | - |
+| `1.3` | 22/10/2025 | Atualização das autoras do diagrama UML. | [Mariiana Neris](https://github.com/Maryyscreuza) | - | - |
