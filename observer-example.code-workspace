@@ -1,0 +1,10 @@
+{
+  "folders": [
+    {
+      "path": "docs/PadroesDeProjeto/GoFsComportamentais/observer-example"
+    }
+  ],
+  "settings": {
+    "java.import.maven.enabled": true
+  }
+}
