@@ -1,18 +1,18 @@
-## **1. Introdução**
+## **Introdução**
 
 O Abstract Factory é um padrão de projeto criacional do GoF (Gang of Four) que visa fornecer uma interface para a criação de famílias de objetos relacionados ou dependentes, sem a necessidade de especificar suas classes concretas. Essencialmente, o padrão encapsula um grupo de fábricas individuais que possuem um tema em comum, permitindo que o código cliente crie objetos que pertencem a uma mesma família, garantindo sua compatibilidade.
 
 No contexto do projeto **CorreioDigital**, este padrão será utilizado para gerenciar a criação de diferentes tipos de notificações (E-mail, SMS, etc.), onde cada tipo constitui uma "família" de objetos (mensagem, remetente, serviço de envio).
 
-```
-GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
-```
+[[2](#ref2)]
 
-## **2. Metodologia**
+## **Metodologia**
 
 Este documento foi elaborado por Mariiana Siqueira e Esther Sena segundo uma abordagem iterativa e incremental. Inicialmente foi definido o escopo e estrutura, seguida de pesquisa bibliográfica sobre o padrão Abstract Factory. Em seguida, elaboramos um esboço com texto, diagramas e exemplo de código, que foi revisado internamente. Posteriormente, implementamos e testamos o exemplo de código para validar a correção e coerência com o texto. 
 
-## **3. Problema**
+[[1](#ref1),[2](#ref2)]
+
+## **Problema**
 
 O sistema **CorreioDigital** precisa de um mecanismo flexível para enviar notificações aos usuários através de múltiplos canais. Inicialmente, podemos ter canais como E-mail e SMS, mas a arquitetura deve estar preparada para a futura inclusão de outros, como Notificações Push ou mensagens no WhatsApp.
 
@@ -24,12 +24,9 @@ Cada canal de notificação possui um conjunto específico de componentes:
 
 Uma abordagem ingênua seria instanciar esses objetos diretamente no código cliente usando condicionais (`if/else` ou `switch`) para decidir qual conjunto de classes criar. Essa abordagem leva a um forte acoplamento entre o cliente e as classes concretas, violando o Princípio Aberto-Fechado (Open-Closed Principle). Qualquer adição de um novo canal de notificação exigiria a modificação de todos os pontos no código onde as notificações são criadas, tornando a manutenção complexa e propensa a erros.
 
-```
-GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
-Refactoring Guru - Abstract Factory: [https://refactoring.guru/design-patterns/abstract-factory](https://refactoring.guru/design-patterns/abstract-factory)
-```
+[[2](#ref2)]
 
-## **4. Solução**
+## **Solução**
 
 Para resolver esse problema, aplicaremos o padrão Abstract Factory. A solução consiste em definir uma interface abstrata, `FabricaDeNotificacao`, que declara métodos para criar cada um dos objetos da família de notificação (`criarMensagem`, `criarRemetente`, `criarServicoDeEnvio`).
 
@@ -40,7 +37,9 @@ Para cada canal de notificação suportado, criaremos uma fábrica concreta que 
 
 O código cliente (`ServicoDeNotificacao`) dependerá apenas da interface `FabricaDeNotificacao`. Ele receberá uma instância de uma fábrica concreta (via injeção de dependência, por exemplo) e a utilizará para criar a família de objetos de que precisa, sem nunca conhecer as implementações específicas. Isso garante que o cliente sempre usará um conjunto coeso e compatível de objetos.
 
-## **5. Estrutura (Diagrama UML)**
+[[1](#ref1),[2](#ref2)],[3](#ref3),[6](#ref6)]
+
+## **Estrutura (Diagrama UML)**
 
 A imagem do diagrama a seguir ilustra a estrutura das classes e interfaces envolvidas na solução.
 
@@ -133,7 +132,7 @@ classDiagram
     ServicoDeEnvio <|-- ServicoDeEnvioSms
 ```
 
-#### 5.1. Modelagem do Factory Method para Conteúdo
+#### Modelagem do Factory Method para Conteúdo
 
 A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
 
@@ -146,12 +145,11 @@ A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
     <br> 
 </div>
 
-```GAMMA, E.; HELM, R.; JOHNSON, R.; VLISSIDES, J. Design Patterns: Elements of Reusable Object-Oriented Software. Reading, MA: Addison-Wesley, 1995.
-SERRANO, M. Arquitetura e Desenho de Software – Aula GoFs Criacionais. Universidade de Brasília, 2025. Material em PDF fornecido em aula.
-SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemaking.com/design_patterns/abstract_factory. Acesso em: 22 set. 2025.
-```
+[[3](#ref3),[6](#ref6)]
 
-## **6. Participantes**
+---
+
+## **Participantes**
 
   * **`FabricaDeNotificacao` (AbstractFactory)**: Interface que declara as operações de criação para cada produto abstrato (ex: `criarMensagem()`).
   * **`FabricaDeNotificacaoEmail`, `FabricaDeNotificacaoSms` (ConcreteFactory)**: Classes que implementam a `AbstractFactory` para criar uma família de produtos concretos.
@@ -159,7 +157,9 @@ SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemak
   * **`MensagemEmail`, `MensagemSms`, etc. (ConcreteProduct)**: Implementações concretas dos produtos que são criados pelas fábricas concretas.
   * **`ServicoDeNotificacao` (Client)**: A classe que utiliza as interfaces `AbstractFactory` e `AbstractProduct` para realizar seu trabalho, permanecendo desacoplada das implementações concretas.
 
-## **7. Consequências da Utilização do Padrão**
+---
+
+## **Consequências da Utilização do Padrão**
 
 **Vantagens:**
 
@@ -173,14 +173,16 @@ SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemak
   * **Aumento da Complexidade:** A introdução do padrão adiciona várias novas interfaces e classes ao sistema, o que pode aumentar a complexidade inicial do código.
   * **Dificuldade para Adicionar Novos Produtos:** Adicionar um novo tipo de produto à família (ex: um `Anexo`) exige a alteração da interface da `AbstractFactory` e de todas as suas subclasses concretas, o que pode ser uma mudança custosa.
 
-## **8. Implementação Real (Código Java)**
+---
 
-A implementação completa do padrão Abstract Factory está disponível na pasta `code/abstractfactory/` e inclui:
+## **Implementação Real (Código Java)**
+
+A implementação completa do padrão Abstract Factory está disponível na pasta `src/Criacionais/abstractfactory/` e inclui:
 
 ###  **Estrutura da Implementação**
 
 ```
-code/abstractfactory/
+src/Criacionais/abstractfactory/
 ├── interfaces/                    # Interfaces abstratas
 │   ├── Message.java              # Interface para mensagens
 │   ├── Sender.java               # Interface para remetentes
@@ -206,7 +208,7 @@ code/abstractfactory/
 
 ```bash
 # Navegar para o diretório
-cd docs/PadroesDeProjeto/GoFsCriacionais/code/abstractfactory
+cd src/Criacionais/abstractfactory
 
 # Compilar o projeto
 javac -cp . Main.java
@@ -238,13 +240,11 @@ smsService.sendNotification("+5561999999999", "Sua fatura chegou!");
 5. **Exemplo Prático**: Main.java demonstra o uso do padrão
 
 
-```
-REFATORING.GURU. Abstract Factory in Java. Disponível em: https://refactoring.guru/design-patterns/abstract-factory/java. Acesso em: 25 set. 2025.
-```
+ [[5](#ref5)]
 
 ---
 
-## **8.1. Detalhes da Implementação (Código Java)**
+## **Detalhes da Implementação (Código Java)**
 
 **1. Interfaces dos Produtos (AbstractProduct)**
 
@@ -298,6 +298,7 @@ public interface NotificationFactory {
     DeliveryService createDeliveryService();
 }
 ```
+
 ##### Imagem do código no VSCODE
 
 A figura 4 abaixo ilustra a estrutura da interface `public interface Notification Factory` no ambiente de desenvolvimento VSCode.
@@ -505,29 +506,34 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 
   </details> 
 
+ [[4](#ref5),[5](#ref5)]
+ 
   ----
+
+ 
   
-#### 8.6. Benefícios da Abordagem
+####  **Benefícios da Abordagem**
 
   * **Isolamento das Classes Concretas**: O cliente interage apenas com as interfaces (`NotificationFactory`, `Message`). As implementações concretas podem ser trocadas facilmente sem alterar o código do cliente.
   * **Facilidade para Adicionar Novos Canais**: Para adicionar suporte a notificações *Push*, basta criar uma `PushNotificationFactory` e as classes de produto correspondentes (`PushMessage`, etc.). Nenhuma alteração é necessária no `NotificationService`.
   * **Consistência entre Produtos**: O padrão garante que os objetos criados por uma fábrica são da mesma família e, portanto, compatíveis entre si. Você nunca misturará um `SmsMessage` com um `EmailDeliveryService`.
   * **Alta Coesão e Baixo Acoplamento**: A responsabilidade de criar uma família de objetos fica centralizada na fábrica concreta, promovendo um design mais limpo e organizado.
 
-## **9. Referências**
-
-  * GAMMA, E. et al. **Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos**. Bookman, 2000.
-  * Refactoring Guru - Abstract Factory: [https://refactoring.guru/design-patterns/abstract-factory](https://refactoring.guru/design-patterns/abstract-factory)
-  * SIERRA, K.; BATES, B. Use a Cabeça! Java. Rio de Janeiro: Alta Books, 2005.
-  * REFATORING.GURU. Abstract Factory in Java. Disponível em: https://refactoring.guru/design-patterns/abstract-factory/java. Acesso em: 25 set. 2025.
-  * SERRANO, M. Arquitetura e Desenho de Software – Aula GoFs Criacionais. Universidade de Brasília, 2025. Material em PDF fornecido em aula.
-  * SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemaking.com/design_patterns/abstract_factory. Acesso em: 22 set. 2025.
-
+  *  [[3](#ref3),[6](#ref6)]
 
 ---
 
-👉 Quer que eu monte também a seção final de **“Referências” no estilo dos arquivos `.md` do repositório (com bullets e links diretos)**, para ficar totalmente consistente com a documentação de vocês?
+## **Referências**
 
+  1. <a id="ref1"></a>SERRANO, M. Arquitetura e Desenho de Software – Aula GoFs Criacionais. Universidade de Brasília, 2025. Material em PDF fornecido em aula.
+  2. <a id="ref2">GAMMA, E. et al. **Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos**. Bookman, 2000.
+  3. <a id="ref3">Refactoring Guru - Abstract Factory: [https://refactoring.guru/design-patterns/abstract-factory](https://refactoring.guru/design-patterns/abstract-factory)
+  4. <a id="ref4">SIERRA, K.; BATES, B. Use a Cabeça! Java. Rio de Janeiro: Alta Books, 2005.
+  5. <a id="ref5">REFATORING.GURU. Abstract Factory in Java. Disponível em: https://refactoring.guru/pt-br/design-patterns/abstract-factory/java/example. Acesso em: 25 set. 2025.
+  6. <a id="ref6">SOURCEMAKING. Abstract Factory Design Pattern. Disponível em: https://sourcemaking.com/design_patterns/abstract_factory. Acesso em: 22 set. 2025.
+
+
+---
 
 ## Histórico de Versões
 
@@ -538,3 +544,5 @@ As figuras 11, 12, 13 e 14 abaixo ilustram a estrutura das classes `public class
 | `1.2`  | 06/10/2025 | Revisão documental e adição de códigos de cada classe separada no documento, adição também da modelagem do campo Conteúdo|[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.3`  | 06/10/2025 | Arrumando caminho das imagens e corrigindo imagem das classes SmsMessage.java, SmsSender.java, SmsDeliveryService.java, SmsNotificationFactory.java|[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
 | `1.4`  | 13/10/2025 | Atualiando metodologia pós revisão do pull request |[Mariiana Siqueira](https://github.com/Maryyscreuza) | - | - |
+| `1.5`  | 21/10/2025 | Reorganização da estrutura: código movido de `docs/` para `src/Criacionais/abstractfactory/` e linkagem nas referencias |[Esther Sena](https://github.com/esmsena) | - | - |
+| `1.6`  | 21/10/2025 | Ajustando estrutura documental |[Esther Sena](https://github.com/esmsena) | - | - |
