@@ -194,6 +194,15 @@ Conversa chat = new Conversa.ConversaBuilder()
     .adicionarMensagem("Oie Sarah, blz?")
     .build();
 ```
+
+## Como rodar
+Na raiz do projeto rode os seguintes comandos:
+```bash
+cd src/Criacionais/builder/java
+javac com/correiodigital/builder/*.java
+java com.correiodigital.builder.BuilderDemo
+```
+
 ## Bibliografia
 
 Conjunto de obras consultadas. 
