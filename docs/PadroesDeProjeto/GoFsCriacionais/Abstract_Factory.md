@@ -136,14 +136,15 @@ classDiagram
 
 A figura 1 abaixo mostra a modelagem do campo Conteúdo feita manualmente
 
-<div align="center">
-    Figura 1: modelagem do campo Conteúdo
-    <br>
-    <img src="../../Assets/DiagramaAbsFac.jpg" width="1200">
-    <br>
-    <b>Autoras:</b> <a href="https://github.com/esmsena">Esther Sena</a> e <a href="https://github.com/Maryyscreuza">Mariiana Siqueira</a>. 
-    <br> 
-</div>
+<center>
+<font size="3"><p style="text-align: center"><b>Figura 1:</b> Modelagem do campo Conteúdo</p></font>
+</center>
+
+![Diagrama UML](../../Assets/DiagramaAbsFac.jpg)
+
+<center>
+<font size="3"><p style="text-align: center"><b> Autoras:</b> <a href="https://github.com/esmsena">Esther Sena</a> e <a href="https://github.com/Maryyscreuza">Mariiana Siqueira</p></font>
+</center>
 
 [[3](#ref3),[6](#ref6)]
 

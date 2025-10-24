@@ -33,10 +33,7 @@ O processo de aplicação do padrão no projeto seguiu as seguintes etapas:
 
 Abaixo está a representação do diagrama de estados aplicado ao projeto:
 
-<p align="center">
-  <img src="../../Assets/diagramaState.png" alt="Diagrama UML do padrão State" width="600px">
-</p>
-
+![Diagrama UML](../../Assets/diagramaState.png)
 
 ## Desenvolvimento
 

@@ -57,27 +57,29 @@ Sem alterar o código dos módulos principais (chat ou gamificação), preservan
 
 Este, na figura 1, é o diagrama conceitual do padrão Observer, mostrando a relação entre as interfaces e as classes concretas.
 
-<div align="center">
-    Figura 1: Diagrama genérico do padrão Observer
-    <br>
-    <img src="../../Assets/ObserverGenerico.png" width="1200">
-    <br>
-    <b>Fonte:</b> <a href="https://aprender3.unb.br/pluginfile.php/3178398/mod_page/content/1/Material%20Complementar%20T%C3%B3pico%202%20-%20DSW%20-%20GoFs%20Comportamentais.zip">Aprender 3 - Arquitetura de Software</a> 
-    <br> 
-</div>
+<center>
+<font size="3"><p style="text-align: center"><b>Figura 1:</b> Diagrama genérico do padrão Observer</p></font>
+</center>
+
+![Diagrama UML](../../Assets/ObserverGenerico.png)
+
+<center>
+<font size="3"><p style="text-align: center"><b> Fontes:</b> <a href="https://aprender3.unb.br/pluginfile.php/3178398/mod_page/content/1/Material%20Complementar%20T%C3%B3pico%202%20-%20DSW%20-%20GoFs%20Comportamentais.zip">Aprender 3 - Arquitetura de Software</a> </p></font>
+</center>
 
 ### Diagrama Específico do "Correio Digital"
 
 O diagrama, presente na figura abaixo, representa o diagrama específico do Observer no contexto do nosso projeto.
 
-<div align="center">
-    Figura 2: Diagrama do padrão Observer no Correio Digital
-    <br>
-    <img src="../../Assets/ObserverCorreioDigital.png" width="1200">
-    <br>
-    <b>Autoras:</b> <a href="https://github.com/esmsena">Esther Sena</a> e <a href="https://github.com/Maryyscreuza">Mariiana Siqueira</a>. 
-    <br> 
-</div>
+<center>
+<font size="3"><p style="text-align: center"><b>Figura 2:</b> Diagrama do padrão Observer no Correio Digital</p></font>
+</center>
+
+![Diagrama UML2](../../Assets/ObserverCorreioDigital.png)
+
+<center>
+<font size="3"><p style="text-align: center"><b> Autoras:</b> <a href="https://github.com/esmsena">Esther Sena</a> e <a href="https://github.com/Maryyscreuza">Mariiana Siqueira</a></p></font>
+</center>
 
 Onde consta, 
 
